@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_10_082259) do
-  create_table "valute_histories", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_10_10_112535) do
+  create_table "valute_courses", force: :cascade do |t|
     t.integer "valute_id", null: false
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "value_cents", default: 0, null: false
     t.string "value_currency", default: "RUB", null: false
-    t.index ["valute_id"], name: "index_valute_histories_on_valute_id"
+    t.index ["valute_id"], name: "index_valute_courses_on_valute_id"
   end
 
   create_table "valutes", force: :cascade do |t|
@@ -28,5 +28,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_082259) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "valute_histories", "valutes"
+  add_foreign_key "valute_courses", "valutes"
 end
