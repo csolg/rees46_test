@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_10_112535) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_10_122740) do
   create_table "valute_courses", force: :cascade do |t|
     t.integer "valute_id", null: false
     t.date "date"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_10_112535) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["char_code"], name: "index_valutes_on_char_code", unique: true
   end
 
   add_foreign_key "valute_courses", "valutes"
