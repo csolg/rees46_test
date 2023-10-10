@@ -1,0 +1,2 @@
+class Valute < ApplicationRecord
+end
