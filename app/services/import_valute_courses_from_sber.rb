@@ -8,8 +8,9 @@ class ImportValuteCoursesFromSber < ApplicationService
   end
 
   def call
-    date_req = date.strftime('%d/%m/%Y')
-    http_result = Faraday.get("https://www.cbr.ru/scripts/XML_daily.asp?date_req=#{date_req}")
+    date_req = date.strftime('%d.%m.%Y')
+    url = "https://www.cbr.ru/scripts/XML_daily.asp?date_req=#{date_req}"
+    http_result = Faraday.get(URI.parse(url))
     courses = Nokogiri::XML(http_result.body)
     courses.xpath('//Valute/CharCode[text() = "USD" or text() = "EUR"]').each do |course|
       char_code = course.xpath('CharCode').children.first.to_s
