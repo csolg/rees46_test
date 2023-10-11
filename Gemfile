@@ -50,8 +50,8 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'money-rails', '~> 1.12'
 gem 'faraday', '~> 2.7'
+gem 'money-rails', '~> 1.12'
 gem 'nokogiri', '~> 1.15'
 
 group :development, :test do

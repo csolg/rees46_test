@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 RSpec.configure do |config|
   # Add VCR to all tests
-  config.around(:each) do |example|
+  config.around do |example|
     vcr_tag = example.metadata[:vcr]
 
     if vcr_tag
@@ -13,12 +15,14 @@ RSpec.configure do |config|
         parent = parent.parent_groups.second
       end
 
-      name = path_data.map{|str| str.underscore.gsub(/\./,'').gsub(/[^\w\/]+/, '_').gsub(/\/$/, '')}.select{|str| str.size > 0 }.reverse.join("/")
+      name = path_data.map do |str|
+        str.underscore.gsub('.', '').gsub(%r{[^\w/]+}, '_').gsub(%r{/$}, '')
+      end.reject(&:empty?).reverse.join('/')
 
       options[:record] = :new_episodes
-      
+
       VCR.use_cassette(name, options) do
-        time = VCR.current_cassette.originally_recorded_at || Time.now
+        time = VCR.current_cassette.originally_recorded_at || Time.zone.now
 
         Timecop.travel(time) do
           example.call
