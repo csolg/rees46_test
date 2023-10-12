@@ -8,7 +8,7 @@ class HomeController < ApplicationController
       @columns = data.result
       render
     else
-      render 500, text: 'Fail to generate data for C3'
+      redirect_to '/500.html'
     end
   end
 end
