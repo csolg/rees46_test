@@ -12,5 +12,5 @@ date = 30.days.ago
 
 while date <= Time.zone.today
   ImportValuteCoursesFromSber.call(date)
-  date += 1
+  date += 1.day
 end
