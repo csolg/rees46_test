@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class GenerateDataForC3 < ApplicationService
   attr_reader :from, :to
 
-  def initialize(from=nil, to=nil)
+  def initialize(from = nil, to = nil)
     @from = from || 1.month.ago
     @from = @from.in_time_zone.to_date
-    @to = to || Date.today
+    @to = to || Time.zone.today
     @to = @to.in_time_zone.to_date
   end
 
@@ -17,13 +19,13 @@ class GenerateDataForC3 < ApplicationService
   end
 
   def generate_dates_hash
-    Hash[generate_dates.map { |d| [d, nil] }]
+    generate_dates.index_with { |_d| nil }
   end
-  
+
   def generate_valutes
     Valute.all.to_a.map do |valute|
       dates_hash = generate_dates_hash
-      valute.valute_courses.where('date between ? and ?', from, to).each do |course|
+      valute.valute_courses.where('date between ? and ?', from, to).find_each do |course|
         dates_hash[course.date] = course.value.to_f
       end
       [valute.char_code] + dates_hash.values

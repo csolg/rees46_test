@@ -80,9 +80,9 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 
+  gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
-  gem 'factory_bot_rails'
 end
