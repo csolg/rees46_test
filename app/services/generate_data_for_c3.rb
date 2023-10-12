@@ -24,7 +24,7 @@ class GenerateDataForC3 < ApplicationService
     Valute.all.to_a.map do |valute|
       dates_hash = generate_dates_hash
       valute.valute_courses.where('date between ? and ?', from, to).each do |course|
-        dates_hash[course.date] = course.value
+        dates_hash[course.date] = course.value.to_f
       end
       [valute.char_code] + dates_hash.values
     end
