@@ -1,9 +1,6 @@
-# frozen_string_literal: true
-
 # Pin npm packages by running ./bin/importmap
 
-pin 'application', preload: true
-pin '@hotwired/turbo-rails', to: 'turbo.min.js', preload: true
-pin '@hotwired/stimulus', to: 'stimulus.min.js', preload: true
-pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
-pin_all_from 'app/javascript/controllers', under: 'controllers'
+pin "application", preload: true
+
+pin "c3", to: "https://ga.jspm.io/npm:c3@0.7.20/c3.js"
+pin "d3", to: "https://ga.jspm.io/npm:d3@5.16.0/dist/d3.node.js"

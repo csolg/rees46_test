@@ -53,6 +53,7 @@ gem 'bootsnap', require: false
 gem 'faraday', '~> 2.7'
 gem 'money-rails', '~> 1.12'
 gem 'nokogiri', '~> 1.15'
+gem 'slim-rails', '~> 3.6'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
