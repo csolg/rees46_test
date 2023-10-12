@@ -7,11 +7,11 @@ RSpec.configure do |config|
 
     if vcr_tag
       options = vcr_tag.is_a?(Hash) ? vcr_tag : {}
-      path_data = [example.metadata[:description]]
+      path_data = [example.metadata[:full_description]]
       parent = example.example_group
 
       while parent.parent_groups.size > 1
-        path_data << parent.metadata[:description]
+        path_data << parent.metadata[:full_description]
         parent = parent.parent_groups.second
       end
 

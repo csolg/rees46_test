@@ -16,7 +16,7 @@ class ImportValuteCoursesFromSber < ApplicationService
     url = "https://www.cbr.ru/scripts/XML_daily.asp?date_req=#{date_req}"
     http_result = Faraday.get(URI.parse(url))
     courses = Nokogiri::XML(http_result.body)
-    courses.xpath('//Valute/CharCode[text() = "USD" or text() = "EUR"]')
+    courses.xpath('//Valute/CharCode[text()="USD" or text()="EUR"]').map(&:parent)
   end
 
   def process_course(course)
