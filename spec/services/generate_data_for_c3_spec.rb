@@ -7,7 +7,7 @@ describe GenerateDataForC3 do
   let!(:valute) { create(:valute, char_code: 'USD') }
   let!(:valute_courses) do
     from.step(Time.zone.today.to_date).map do |date|
-      create(:valute_course, valute:, date:, value: rand(100))
+      create(:valute_course, valute:, date:, value: rand(1..100))
     end
   end
   let(:response) { described_class.call(from) }
@@ -17,14 +17,14 @@ describe GenerateDataForC3 do
   context 'when valute_courses exist for all days' do
     it { expect(response.success?).to be true }
     it { expect(response.result.map(&:first)).to eq %w[dates USD EUR] }
-    it { expect(response.result[1]).to eq ['USD'] + valute_courses.map(&:value) }
+    it { expect(response.result[1]).to eq ['USD'] + valute_courses.map(&:value).map(&:to_f) }
     it { expect(response.result[2].compact.size).to eq 1 }
   end
 
   context 'with gaps in valute courses' do
     let(:n) { 3 }
 
-    before { n.times { valute_courses.sample.destroy } }
+    before { valute_courses.sample(n).map(&:destroy) }
 
     it { expect(described_class.call(from).result[1].select(&:nil?).size).to eq n }
   end
