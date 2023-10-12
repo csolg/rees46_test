@@ -84,4 +84,5 @@ group :test do
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
+  gem 'factory_bot_rails'
 end
