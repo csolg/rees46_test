@@ -21,8 +21,10 @@ class ImportValuteCoursesFromSber < ApplicationService
 
   def process_course(course)
     char_code, name, value = extract_data(course)
-    valute = Valute.find_or_create_by!(char_code:, name:)
-    valute.valute_courses.create!(date:, value:) unless valute.valute_courses.exists?(date:)
+    Valute.transaction do
+      valute = Valute.find_or_create_by!(char_code:, name:)
+      valute.valute_courses.create!(date:, value:) unless valute.valute_courses.exists?(date:)
+    end
   end
 
   def extract_data(course)
